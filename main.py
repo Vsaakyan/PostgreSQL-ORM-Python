@@ -16,6 +16,7 @@ create_tables(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+
 # task3
 
 
@@ -72,6 +73,12 @@ def find_shop(conn):
             WHERE publisher.name=%s; 
             ''', (publisher_name,))
         print(cur.fetchone())
+
+
+def find_publisher():
+    name_publ = input("Введите имя автора) : ")
+    for n in session.query(Publisher).filter(Publisher.name.like(name_publ)).all():
+        return n
 
 
 with psycopg2.connect(database="bookshop_db", user="postgres", password="rusarm77") as conn:
