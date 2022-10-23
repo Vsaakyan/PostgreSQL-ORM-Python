@@ -39,29 +39,6 @@ session.close()
 # task2
 
 
-def conn_any_db():
-    try:
-        db_type = input('Введите тип БД, к которому желаете подключиться: ')
-        username = input('Введите имя пользователя: ')
-        password = input('Введите пароль: ')
-        hostname = input('Введите имя хоста: ')
-        code = input('Введите код: ')
-        db_name = input('Введите название БД: ')
-        connection = f'{db_type}://{username}:{password}@{hostname}:{code}/{db_name}'
-        DSN = connection
-        connect = sqlalchemy.create_engine(DSN)
-    except:
-        print('SMTH WENT WRONG...try again')
-    else:
-        print('Connected with DB! Everything is ok!')
-    return connect
-
-
-# * conn_any_db()
-# Насчет этой функции, хотел у Вас уточнить как ее оптимизировать, чтобы при подключении к несуществующей БД срабатывал
-# --> блок except? *
-
-
 def find_shop(conn):
     publisher_name = input("What is publisher's name? ")
     with conn.cursor() as cur:
@@ -83,6 +60,7 @@ def find_publisher():
 
 with psycopg2.connect(database="bookshop_db", user="postgres", password="rusarm77") as conn:
     find_shop(conn)
+    
 
 
 
